@@ -1,0 +1,28 @@
+.StoryItem {
+  display: flex;
+  align-items: center;
+  padding: 1px 16px 5px 5px;
+
+  img {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 1.9px solid #d82b7e;
+    padding: 2px;
+  }
+  .story-info {
+    display: flex;
+    flex-direction: column;
+    margin-left: 14px;
+
+    .story-user {
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .story-time {
+      font-size: 10px;
+      color: #8e8e8e;
+    }
+  }
+}
