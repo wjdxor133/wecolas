@@ -57,7 +57,7 @@ class Login extends React.Component {
   btnClick = () => {
     console.log("사용자 ID :", this.state.userName);
     console.log("사용자 Password :", this.state.userPW);
-    this.goToMain();
+    // this.goToMain();
   };
 
   render() {
