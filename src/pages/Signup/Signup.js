@@ -1,4 +1,5 @@
 import React from "react";
+
 import LogoTextImg from "../../images/logo_text.png";
 import "./Signup.scss";
 
@@ -17,7 +18,7 @@ class Signup extends React.Component {
   };
 
   SignUpStart = () => {
-    fetch("http://10.58.4.98:8000/api/user", {
+    fetch("http://10.58.5.168:8000/api/user", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -95,9 +96,10 @@ class Signup extends React.Component {
           </div>
         </div>
         <div className="toLogin">
-          <p>
-            계정이 있으신가요? <a>로그인</a>
-          </p>
+          <p>계정이 있으신가요?</p>
+          <a className="LoginBtn" href="/Login">
+            로그인
+          </a>
         </div>
       </div>
     );

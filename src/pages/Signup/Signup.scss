@@ -129,8 +129,10 @@
     width: 350px;
     padding: 25px;
     border: 1px solid rgba(var(--b6a, 219, 219, 219), 1);
-    a {
+    .LoginBtn {
       color: #0095f6;
+      text-decoration: none;
+      margin-left: 3px;
     }
   }
 }
