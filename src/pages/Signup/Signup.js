@@ -1,5 +1,4 @@
 import React from "react";
-
 import LogoTextImg from "../../images/logo_text.png";
 import "./Signup.scss";
 
