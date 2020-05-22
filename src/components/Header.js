@@ -16,19 +16,25 @@ class Header extends React.Component {
     checked: false,
     statusValue: "",
   };
+
+  gotoLogin = () => {
+    this.props.his.history.push("/");
+  };
+
   //로그 아웃
   logOut = () => {
     if (localStorage.getItem("token")) {
-      toast.success("성공", {
-        position: "bottom-center",
-      });
-      // prompt("로그아웃 하시겠습니까?");
-      // localStorage.removeItem("token");
-      // this.setState({ checked: true, statusValue: "200" }, () => {
-      //   console.log(this.state.checked, this.state.statusValue);
-      // });
+      toast.success(
+        "로그아웃 성공!",
+        {
+          position: "bottom-center",
+        },
+        { autoClose: 1500 }
+      );
+      alert("로그아웃 하시겠습니까?");
+      localStorage.removeItem("token");
 
-      //this.props.his.history.push("/");
+      setTimeout(this.gotoLogin, 3500);
     } else {
       toast.error("token 지워짐", {
         position: "bottom-center",

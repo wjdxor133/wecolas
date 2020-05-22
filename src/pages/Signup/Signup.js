@@ -1,6 +1,7 @@
 import React from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import LogoTextImg from "../../images/logo_text.png";
-import { Link } from "react-router-dom";
 import "./Signup.scss";
 
 class Signup extends React.Component {
@@ -9,7 +10,10 @@ class Signup extends React.Component {
     telephone: "",
     username: "",
     password: "",
-    signupChecked: false,
+  };
+
+  gotoLogin = () => {
+    return this.props.history.push("/");
   };
 
   SignUpChecked = (e) => {
@@ -31,12 +35,13 @@ class Signup extends React.Component {
         password: this.state.password,
       }),
     });
-    return true;
+    toast.success(
+      "회원가입 성공!",
+      { position: "bottom-center" },
+      { autoClose: 1500 }
+    );
+    setTimeout(this.gotoLogin, 3500);
   };
-
-  componentDidMount() {
-    this.SignUpStart();
-  }
 
   render() {
     return (
@@ -91,6 +96,7 @@ class Signup extends React.Component {
             >
               가입
             </button>
+            <ToastContainer />
             <p>
               가입하면 Instagram의 <b>약관</b>, <b>데이터 정책</b>및{" "}
               <b>쿠키 정책</b>에 동의하게 됩니다.

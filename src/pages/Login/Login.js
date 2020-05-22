@@ -14,42 +14,34 @@ class Login extends React.Component {
       password: "",
       idChecked: false,
       pwChecked: false,
-      btnColor: "#b2dffc",
-      localValue: false,
-      toastChecked: false,
     };
   }
 
   // 아이디 값 체크
-
   idInputCheck = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-    if (event.target.value.includes("@")) {
-      this.setState({ idChecked: true }, () => this.btnChangeColor());
+    if (event.target.name === "id" && event.target.value.includes("@")) {
+      this.setState({ idChecked: true }, () =>
+        console.log(this.state.idChecked)
+      );
     } else {
-      this.setState({ idChecked: false }, () => this.btnChangeColor());
+      this.setState({ idChecked: false });
     }
   };
 
   // 비밀번호 값 체크
   pwInputCheck = (event) => {
     this.setState({ [event.target.name]: event.target.value });
-    if (event.target.value.length >= 5) {
+    if (event.target.name === "password" && event.target.value.length >= 5) {
       this.setState(
-        { [event.target.name]: event.target.value, pwChecked: true },
-        () => this.btnChangeColor()
+        {
+          [event.target.name]: event.target.value,
+          pwChecked: true,
+        },
+        () => console.log(this.state.pwChecked)
       );
     } else {
-      this.setState({ pwChecked: false }, () => this.btnChangeColor());
-    }
-  };
-
-  // 버튼 변화
-  btnChangeColor = () => {
-    if (this.state.idChecked && this.state.pwChecked) {
-      this.setState({ btnColor: "#83ccfb" });
-    } else {
-      this.setState({ btnColor: "#b2dffc" });
+      this.setState({ pwChecked: false });
     }
   };
 
@@ -59,10 +51,9 @@ class Login extends React.Component {
     //   password: this.state.password,
     // };
     fetch("http://10.58.5.168:8000/api/user/login", {
-      //post하고 싶을때는 이렇게 {}안에 정보를 넣는다 .
       method: "POST",
       headers: {
-        "Content-Type": "application/json", //안써줘도 문제는 없는데 일단은.
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id: this.state.id,
@@ -74,15 +65,14 @@ class Login extends React.Component {
         console.log("확인", response);
         if (response.Authorization) {
           localStorage.setItem("token", response.Authorization);
-          this.setState({ toastChecked: true });
           toast.success(
             "로그인 성공!",
-            { position: "top-center" },
+            { position: "bottom-center" },
             { autoClose: 1500 }
           );
           setTimeout(this.gotoMain, 3500);
         } else {
-          toast.error("로그인 실패!", { position: "top-left" });
+          toast.error("로그인 실패!", { position: "bottom-center" });
         }
       });
   };
@@ -114,7 +104,11 @@ class Login extends React.Component {
           <button
             className="loginBtn"
             type="button"
-            style={{ backgroundColor: this.state.btnColor }}
+            style={
+              this.state.idChecked && this.state.pwChecked
+                ? { backgroundColor: "#83ccfb" }
+                : { backgroundColor: "#b2dffc" }
+            }
             onClick={this.handleSubmit}
           >
             로그인
