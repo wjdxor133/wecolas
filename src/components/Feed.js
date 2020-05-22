@@ -59,6 +59,7 @@ class Feed extends React.Component {
     // .then((res) => {
     //   this.setState({commentList: res.commentList})
     // });
+    //
   };
 
   render() {
