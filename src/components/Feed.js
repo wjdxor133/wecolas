@@ -46,6 +46,19 @@ class Feed extends React.Component {
       commentList: this.state.commentList,
       commentText: "",
     });
+    // 댓글 API 연동
+    // fetch("http://10.58.5.168:8000/api/user", {
+    //   method: "POST",
+    //   headers: {
+    //     Authorization: "token",
+    //   },
+    //   body: JSON.stringify({
+    //     commentList: this.state.commentList,
+    //   }),
+    // }).then((res) => res.json())
+    // .then((res) => {
+    //   this.setState({commentList: res.commentList})
+    // });
   };
 
   render() {

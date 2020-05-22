@@ -1,6 +1,5 @@
 import React from "react";
 import img from "../../images/logo_text.png";
-import { withRouter } from "react-router-dom";
 import "./Login.scss";
 
 class Login extends React.Component {
@@ -13,15 +12,29 @@ class Login extends React.Component {
       idChecked: false,
       pwChecked: false,
       btnColor: "#b2dffc",
+      localValue: false,
     };
   }
 
+<<<<<<< Updated upstream
   //메인으로 이동
   goToMain = () => {
     if (this.state.localValue) {
       this.props.history.push("/Main");
+=======
+  localStoreStatus = () => {
+    let data = localStorage.getItem("token");
+    if (data === null) {
+      this.props.history.push("/");
+>>>>>>> Stashed changes
     }
   };
+
+  // 메인으로 이동
+  // goToMain = () => {
+  //   console.log(this.props);
+  //   this.props.history.push("/Main");
+  // };
 
   // 아이디 값 체크
   idInputCheck = (event) => {
@@ -62,7 +75,10 @@ class Login extends React.Component {
     // this.goToMain();
   };
 
+<<<<<<< Updated upstream
   // API 연결
+=======
+>>>>>>> Stashed changes
   handleSubmit = () => {
     // const data = {
     //   id: this.state.id,
@@ -83,7 +99,13 @@ class Login extends React.Component {
       .then((response) => {
         console.log(response);
         if (response.Authorization) {
+<<<<<<< Updated upstream
           localStorage.setItem("wtw_token", response.Authorization);
+=======
+          localStorage.setItem("token", response.Authorization);
+          this.props.history.push("/Main");
+          console.log(this.props);
+>>>>>>> Stashed changes
         } else {
           alert("nope");
         }
@@ -129,4 +151,4 @@ class Login extends React.Component {
   }
 }
 
-export default withRouter(Login);
+export default Login;

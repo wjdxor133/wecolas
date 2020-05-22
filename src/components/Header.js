@@ -1,5 +1,6 @@
 import React from "react";
 import "./Header.scss";
+import Route from "react-router-dom";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,7 +11,12 @@ import heart from "../images/heart.png";
 import profile from "../images/profile.png";
 
 class Header extends React.Component {
+  logOut = () => {
+    localStorage.removeItem("token");
+    this.props.his.history.push("/");
+  };
   render() {
+    console.log(this.props);
     return (
       <nav className="Header">
         <div className="header-box">
@@ -39,7 +45,7 @@ class Header extends React.Component {
             <div className="header-item">
               <img src={explore} alt="explore" />
               <img src={heart} alt="heart" />
-              <img src={profile} alt="profile" />
+              <img src={profile} alt="profile" onClick={this.logOut} />
             </div>
           </div>
         </div>

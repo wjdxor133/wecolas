@@ -8,7 +8,7 @@ class Main extends React.Component {
   render() {
     return (
       <>
-        <Header />
+        <Header his={this.props} />
         <div className="Main">
           {/* header */}
           <main>
