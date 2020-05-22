@@ -1,6 +1,9 @@
 import React from "react";
 import img from "../../images/logo_text.png";
+import { withRouter } from "react-router-dom";
 import "./Login.scss";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 class Login extends React.Component {
   constructor() {
@@ -13,30 +16,12 @@ class Login extends React.Component {
       pwChecked: false,
       btnColor: "#b2dffc",
       localValue: false,
+      toastChecked: false,
     };
   }
 
-<<<<<<< Updated upstream
-  //메인으로 이동
-  goToMain = () => {
-    if (this.state.localValue) {
-      this.props.history.push("/Main");
-=======
-  localStoreStatus = () => {
-    let data = localStorage.getItem("token");
-    if (data === null) {
-      this.props.history.push("/");
->>>>>>> Stashed changes
-    }
-  };
-
-  // 메인으로 이동
-  // goToMain = () => {
-  //   console.log(this.props);
-  //   this.props.history.push("/Main");
-  // };
-
   // 아이디 값 체크
+
   idInputCheck = (event) => {
     this.setState({ [event.target.name]: event.target.value });
     if (event.target.value.includes("@")) {
@@ -68,17 +53,6 @@ class Login extends React.Component {
     }
   };
 
-  // 버튼 클릭
-  btnClick = () => {
-    console.log("사용자 ID :", this.state.id);
-    console.log("사용자 Password :", this.state.password);
-    // this.goToMain();
-  };
-
-<<<<<<< Updated upstream
-  // API 연결
-=======
->>>>>>> Stashed changes
   handleSubmit = () => {
     // const data = {
     //   id: this.state.id,
@@ -97,24 +71,30 @@ class Login extends React.Component {
     })
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
+        console.log("확인", response);
         if (response.Authorization) {
-<<<<<<< Updated upstream
-          localStorage.setItem("wtw_token", response.Authorization);
-=======
           localStorage.setItem("token", response.Authorization);
-          this.props.history.push("/Main");
-          console.log(this.props);
->>>>>>> Stashed changes
+          this.setState({ toastChecked: true });
+          toast.success(
+            "로그인 성공!",
+            { position: "top-center" },
+            { autoClose: 1500 }
+          );
+          setTimeout(this.gotoMain, 3500);
         } else {
-          alert("nope");
+          toast.error("로그인 실패!", { position: "top-left" });
         }
       });
+  };
+
+  gotoMain = () => {
+    this.props.history.push("/Main");
   };
 
   render() {
     return (
       <div className="Login">
+        <ToastContainer />
         <div className="login-form">
           <img src={img} alt="Logo" />
           <input
@@ -151,4 +131,4 @@ class Login extends React.Component {
   }
 }
 
-export default Login;
+export default withRouter(Login);

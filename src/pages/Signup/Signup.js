@@ -1,5 +1,6 @@
 import React from "react";
 import LogoTextImg from "../../images/logo_text.png";
+import { Link } from "react-router-dom";
 import "./Signup.scss";
 
 class Signup extends React.Component {
@@ -8,6 +9,7 @@ class Signup extends React.Component {
     telephone: "",
     username: "",
     password: "",
+    signupChecked: false,
   };
 
   SignUpChecked = (e) => {
@@ -29,6 +31,7 @@ class Signup extends React.Component {
         password: this.state.password,
       }),
     });
+    return true;
   };
 
   componentDidMount() {

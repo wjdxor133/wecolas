@@ -1,22 +1,42 @@
 import React from "react";
 import "./Header.scss";
-import Route from "react-router-dom";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { faSquare } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import logo from "../images/logo.png";
 import logoText from "../images/logo_text.png";
 import explore from "../images/explore.png";
 import heart from "../images/heart.png";
 import profile from "../images/profile.png";
+import Login from "../pages/Login/Login";
 
 class Header extends React.Component {
-  logOut = () => {
-    localStorage.removeItem("token");
-    this.props.his.history.push("/");
+  state = {
+    checked: false,
+    statusValue: "",
   };
+  //로그 아웃
+  logOut = () => {
+    if (localStorage.getItem("token")) {
+      toast.success("성공", {
+        position: "bottom-center",
+      });
+      // prompt("로그아웃 하시겠습니까?");
+      // localStorage.removeItem("token");
+      // this.setState({ checked: true, statusValue: "200" }, () => {
+      //   console.log(this.state.checked, this.state.statusValue);
+      // });
+
+      //this.props.his.history.push("/");
+    } else {
+      toast.error("token 지워짐", {
+        position: "bottom-center",
+      });
+    }
+  };
+
   render() {
-    console.log(this.props);
     return (
       <nav className="Header">
         <div className="header-box">
@@ -31,7 +51,8 @@ class Header extends React.Component {
               <FontAwesomeIcon className="i" icon={faSearch} size="7x" />
               <span>검색</span>
             </div>
-            {/* {headerSearchNone = () => {<div className="header-searchNone">
+            {/* 검색 창 누르면 바뀌는 로직
+            headerSearchNone = () => {<div className="header-searchNone">
               <div className="searchNone-firstItem">
               <FontAwesomeIcon className="i" icon={faSearch} size="7x" />
                 <input type="text" placeholder="검색" />
@@ -45,7 +66,18 @@ class Header extends React.Component {
             <div className="header-item">
               <img src={explore} alt="explore" />
               <img src={heart} alt="heart" />
-              <img src={profile} alt="profile" onClick={this.logOut} />
+              <img
+                src={profile}
+                alt="profile"
+                onClick={
+                  this.state.checked ? (
+                    <Login checked={this.state.statusValue} />
+                  ) : (
+                    this.logOut
+                  )
+                }
+              />
+              <ToastContainer />
             </div>
           </div>
         </div>
