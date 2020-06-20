@@ -46,10 +46,6 @@ class Login extends React.Component {
   };
 
   handleSubmit = () => {
-    // const data = {
-    //   id: this.state.id,
-    //   password: this.state.password,
-    // };
     fetch("http://10.58.5.168:8000/api/user/login", {
       method: "POST",
       headers: {
